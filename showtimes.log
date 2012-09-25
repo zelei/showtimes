@@ -1,0 +1,6 @@
+#logback.classic pattern: %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+13:40:12.745 [http-8080-1] DEBUG c.e.api.movies.web.IndexController - Get data from cache. Key: Debrecen
+13:40:12.745 [http-8080-1] DEBUG c.e.api.movies.web.IndexController - Reload data. Key: Debrecen
+13:40:13.870 [http-8080-2] DEBUG c.e.api.movies.web.IndexController - Get data from cache. Key: Debrecen
+13:40:14.542 [http-8080-1] DEBUG c.e.api.movies.web.IndexController - Get data from cache. Key: Debrecen
+13:40:15.042 [http-8080-2] DEBUG c.e.api.movies.web.IndexController - Get data from cache. Key: Debrecen
