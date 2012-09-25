@@ -1,7 +1,5 @@
 ********************************************************************************************************************************
-mvn clean install tomcat:run -P dev
-
-
+Showtimes project.
 
 ********************************************************************************************************************************
 Usage: mvn cf:command [command_options]
@@ -45,4 +43,4 @@ Currently available Cloud Foundry Maven Plugin Goals are:
     help                                                                    Get general help
 ********************************************************************************************************************************
 
-mvn clean install cf:update -Pcf
+mvn clean install cf:update -Dcf.username=<username> -Dcf.password=<password>

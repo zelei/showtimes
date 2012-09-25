@@ -201,8 +201,6 @@
 					<target>http://api.cloudfoundry.com</target>
 					<url>movie.showtimes.cloudfoundry.com</url>
 					<memory>512</memory>
-					<username>sandor.zelei@gmail.com</username>
-					<password>45345f43</password>
 				</configuration>
 			</plugin>
 
