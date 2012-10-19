@@ -20,7 +20,6 @@ define('Class', [ "prototype" ], function() {
 });
 
 define('Ajax', [ "prototype" ], function() {
-
 	return Ajax;
 });
 
