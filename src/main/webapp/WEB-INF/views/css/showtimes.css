@@ -1,0 +1,77 @@
+body {
+	font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	line-height: 1.4em;
+	color: #4d4d4d;
+	width: 550px;
+	margin: 0 auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-font-smoothing: antialiased;
+	-ms-font-smoothing: antialiased;
+	-o-font-smoothing: antialiased;
+	font-smoothing: antialiased;
+}
+
+li {
+	list-style: none;
+}
+
+input[type=text] { @include transition(all 0.30s ease-in-out);
+	outline: none;
+	padding: 3px 0px 3px 3px;
+	margin: 5px 1px 3px 0px;
+	border: 1px solid #8d7d77;
+}
+
+.cityText {
+	margin-top: 10px !important;
+	width: 100%;
+}
+
+.theater {
+	margin-top: 10px;
+	border-radius: inherit;
+	border: 1px solid #6c615c;
+	border-radius: inherit;
+}
+
+.theater .header {
+	top: 0;
+	right: 0;
+	left: 0;
+	height: 15px;
+	z-index: 2;
+	background: #8d7d77;
+	border-bottom: 1px solid #6c615c;
+}
+
+.theater .name {
+	padding-top: 10px;
+	padding-bottom: 5px;
+	padding-left: 10px;
+	font-size: 24pt;
+}
+
+.theater .address {
+	padding-left: 10px;
+	font-size: 14pt;
+}
+
+.movie {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-top: 1px solid #6c615c;
+}
+
+.movie:FIRST-CHILD {
+	border-top: 0px;
+}
+
+.movies {
+	padding-top: 5px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+b {
+	font-weight: bold;
+}

@@ -1,0 +1,39 @@
+<section id="theaters" data-bind="visible: loaded"
+	style="display: none;">
+
+	<input type="text" class="cityText"
+		data-bind="value: city, valueUpdate: 'enterKey'">
+
+	<ul data-bind="foreach: theaters">
+		<li class="theater">
+			<div class="header"></div>
+
+			<div class="name" data-bind="text: name"></div>
+			<div class="address" data-bind="text: address"></div>
+
+			<ul class="movies" data-bind="foreach: movies">
+				<li class="movie">
+
+					<span data-bind="text: name"></span>
+
+					<span>-</span>
+					<span>
+						<b>[</b>
+					</span>
+					<span data-bind="foreach: times">
+						<span data-bind="visible: $index">
+							<b>|</b>
+						</span>
+						<span data-bind="text: $data"></span>
+					</span>
+					<span>
+						<b>]</b>
+					</span>
+
+					<div data-bind="text: info"></div>
+					<div data-bind="text: rating"></div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</section>
