@@ -8,23 +8,16 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
 
 public class GoogleShowtimeService implements ShowtimeService {
-
-	private static final String SPACE = " ";
-
-	private static final Logger LOGGER = LoggerFactory.getLogger(GoogleShowtimeService.class);
 
 	public GoogleShowtimeService() {
 		super();
@@ -65,16 +58,14 @@ public class GoogleShowtimeService implements ShowtimeService {
 			public Movie apply(Element movieElement) {
 				String name = GoogleShowtimeService.removeSpecialChars(movieElement.select(".name").text());
 				String info = GoogleShowtimeService.removeSpecialChars(movieElement.select(".info").text());
-
-				String ratingText = movieElement.select(".info>nobr>img[alt]").attr("alt");
-
-				if (StringUtils.isNotEmpty(ratingText)) {
-					info += GoogleShowtimeService.SPACE + ratingText;
-				}
-
+				String rating = movieElement.select(".info>nobr>img[alt]").attr("alt");
 				List<String> times = GoogleShowtimeService.processTimesElement(movieElement.select(".times>span"));
 
-				return new Movie(name, info, times);
+				if (!rating.isEmpty()) {
+					info = info.substring(0, info.lastIndexOf(" - :"));
+				}
+
+				return new Movie(name, info, rating, times);
 			}
 
 		});

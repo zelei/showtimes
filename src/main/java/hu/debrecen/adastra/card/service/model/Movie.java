@@ -11,16 +11,19 @@ public class Movie implements Serializable {
 
 	private String info;
 
+	private String rating;
+
 	private List<String> times;
 
 	public Movie() {
 		super();
 	}
 
-	public Movie(String name, String info, List<String> times) {
+	public Movie(String name, String info, String rating, List<String> times) {
 		super();
 		this.name = name;
 		this.info = info;
+		this.rating = rating;
 		this.times = times;
 	}
 
@@ -48,9 +51,17 @@ public class Movie implements Serializable {
 		this.times = times;
 	}
 
+	public String getRating() {
+		return this.rating;
+	}
+
+	public void setRating(String rating) {
+		this.rating = rating;
+	}
+
 	@Override
 	public String toString() {
-		return "Movie [name=" + this.name + ", info=" + this.info + ", times=" + this.times + "]";
+		return "Movie [name=" + this.name + ", info=" + this.info + ", rating=" + this.rating + ", times=" + this.times + "]";
 	}
 
 }
