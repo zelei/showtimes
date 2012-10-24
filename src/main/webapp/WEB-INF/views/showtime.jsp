@@ -24,7 +24,7 @@
 
 		if (hash) {
 			templateManager.loadTemplate('showtimes', function() {
-				knockout.applyBindings(new ShowtimesViewModel(hashManager, "hu", hash));
+				knockout.applyBindings(new ShowtimesViewModel(hashManager, hash));
 			});
 		} else {
 

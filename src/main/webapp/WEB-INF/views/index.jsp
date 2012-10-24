@@ -20,14 +20,11 @@
 	require([ 'util' ], function(util, knockout, ShowtimesViewModel) {
 
 		var navigator = new util.Navigator();
-		var templateManager = new util.TemplateManager("body");
 
 		if (navigator.isSupported()) {
-
 			navigator.getCity(function(local, city) {
 				window.location = "./" + local.toLowerCase() + "#" + city;
 			});
-
 		} else {
 
 		}

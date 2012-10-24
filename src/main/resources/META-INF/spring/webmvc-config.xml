@@ -15,11 +15,14 @@
 			type="annotation" />
 	</context:component-scan>
 
-	<mvc:resources location="/WEB-INF/views/js/" mapping="/js/**" />
+	<mvc:resources location="/WEB-INF/js/" mapping="/js/**"
+		cache-period="31536000" />
 
-	<mvc:resources location="/WEB-INF/views/css/" mapping="/css/**" />
+	<mvc:resources location="/WEB-INF/css/" mapping="/css/**"
+		cache-period="31536000" />
 
-	<mvc:resources location="/WEB-INF/views/template/" mapping="/template/**" />
+	<mvc:resources location="/WEB-INF/template/"
+		mapping="/template/**" cache-period="31536000" />
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

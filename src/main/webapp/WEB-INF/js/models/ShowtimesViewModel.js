@@ -2,13 +2,12 @@ define([ 'Class', 'knockout', 'Ajax', 'domain' ], function(Class, ko, Ajax, doma
 
 	return Class.create({
 
-		initialize : function(hashManager, local, city) {
+		initialize : function(hashManager, city) {
 
 			var self = this;
 
 			// setters
 			this.city = city;
-			this.local = local;
 			this.hashManager = hashManager;
 
 			// observables
@@ -30,20 +29,23 @@ define([ 'Class', 'knockout', 'Ajax', 'domain' ], function(Class, ko, Ajax, doma
 			//
 			if (city) {
 				this.city(city);
-				this.load(local, city);
+				this.load(city);
 			}
 
 		},
 
-		load : function(local, near) {
+		load : function(near) {
 			var self = this;
-			var url = './api';
+
+			var url = window.location.pathname + '/api';
+
+			var parameters = {
+				near : near
+			};
+
 			new Ajax.Request(url, {
 				method : 'GET',
-				parameters : {
-					near : near,
-					hl : local
-				},
+				parameters : parameters,
 				evalJSON : true,
 				onSuccess : function(transport) {
 					try {
