@@ -1,6 +1,5 @@
 package com.epam.api.movies.service.impl;
 
-
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
@@ -30,26 +29,29 @@ public class JSONShowtimeCacheService implements ShowtimeCacheService<String> {
 			@Override
 			public String load(CacheKey key) throws Exception {
 				JSONShowtimeCacheService.LOGGER.debug("Reload data. Key: {}", key);
-				return new ObjectMapper().writeValueAsString(showtimeService.getShowtimes(key.getNear(), key.getDate()));
+				return new ObjectMapper().writeValueAsString(showtimeService.getShowtimes(key.getNear(), key.getLocal(), key.getDate()));
 			}
 		});
 
 	}
 
 	@Override
-	public String get(String near, int date) throws ExecutionException {
-		return this.cacheHandler.get(new CacheKey(near, date));
+	public String get(String near, String local, int date) throws ExecutionException {
+		return this.cacheHandler.get(new CacheKey(near, local, date));
 	}
 
 	private class CacheKey {
 
 		private final String near;
 
+		private final String local;
+
 		private final int date;
 
-		public CacheKey(String near, int date) {
+		public CacheKey(String near, String local, int date) {
 			super();
 			this.near = near;
+			this.local = local;
 			this.date = date;
 		}
 
@@ -57,13 +59,12 @@ public class JSONShowtimeCacheService implements ShowtimeCacheService<String> {
 			return this.near;
 		}
 
-		public int getDate() {
-			return this.date;
+		public String getLocal() {
+			return this.local;
 		}
 
-		@Override
-		public String toString() {
-			return "CacheKey [near=" + this.near + ", date=" + this.date + "]";
+		public int getDate() {
+			return this.date;
 		}
 
 		@Override
@@ -72,6 +73,7 @@ public class JSONShowtimeCacheService implements ShowtimeCacheService<String> {
 			int result = 1;
 			result = prime * result + this.getOuterType().hashCode();
 			result = prime * result + this.date;
+			result = prime * result + ((this.local == null) ? 0 : this.local.hashCode());
 			result = prime * result + ((this.near == null) ? 0 : this.near.hashCode());
 			return result;
 		}
@@ -92,6 +94,13 @@ public class JSONShowtimeCacheService implements ShowtimeCacheService<String> {
 				return false;
 			}
 			if (this.date != other.date) {
+				return false;
+			}
+			if (this.local == null) {
+				if (other.local != null) {
+					return false;
+				}
+			} else if (!this.local.equals(other.local)) {
 				return false;
 			}
 			if (this.near == null) {

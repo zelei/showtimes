@@ -4,6 +4,6 @@ import java.util.concurrent.ExecutionException;
 
 public interface ShowtimeCacheService<T> {
 
-	T get(String key, int date) throws ExecutionException;
+	T get(String key, String local, int date) throws ExecutionException;
 
 }

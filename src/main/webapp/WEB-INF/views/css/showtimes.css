@@ -22,6 +22,10 @@ input[type=text] { @include transition(all 0.30s ease-in-out);
 	border: 1px solid #8d7d77;
 }
 
+#theaters {
+	padding-bottom: 20px;
+}
+
 .cityText {
 	margin-top: 10px !important;
 	width: 100%;

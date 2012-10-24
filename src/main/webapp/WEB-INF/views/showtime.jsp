@@ -8,7 +8,6 @@
 <link rel="stylesheet" type="text/css" href="./css/reset.css" />
 <link rel="stylesheet" type="text/css" href="./css/showtimes.css" />
 
-<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript" src="js/require/require.js"></script>
 <script type="text/javascript" src="js/config.js"></script>
 
@@ -17,21 +16,22 @@
 <body id="body"></body>
 
 <script type="text/javascript">
-	require([ 'util' ], function(util, knockout, ShowtimesViewModel) {
+	require([ 'util', 'knockout', 'models/ShowtimesViewModel' ], function(util, knockout, ShowtimesViewModel) {
 
-		var navigator = new util.Navigator();
 		var templateManager = new util.TemplateManager("body");
+		var hashManager = new util.HashManager();
+		var hash = hashManager.getHash();
 
-		if (navigator.isSupported()) {
-
-			navigator.getCity(function(local, city) {
-				window.location = "./" + local.toLowerCase() + "#" + city;
+		if (hash) {
+			templateManager.loadTemplate('showtimes', function() {
+				knockout.applyBindings(new ShowtimesViewModel(hashManager, "hu", hash));
 			});
-
 		} else {
 
 		}
 
 	});
 </script>
+
+
 </html>

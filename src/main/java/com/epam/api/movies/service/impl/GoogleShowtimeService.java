@@ -1,6 +1,5 @@
 package com.epam.api.movies.service.impl;
 
-
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,6 +8,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.epam.api.movies.service.ShowtimeService;
 import com.epam.api.movies.service.model.Movie;
@@ -19,14 +20,18 @@ import com.google.common.collect.Collections2;
 
 public class GoogleShowtimeService implements ShowtimeService {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(GoogleShowtimeService.class);
+
 	public GoogleShowtimeService() {
 		super();
 	}
 
 	@Override
-	public Collection<Theater> getShowtimes(String city, int date) throws Exception {
+	public Collection<Theater> getShowtimes(String city, String local, int date) throws Exception {
 
-		String url = String.format("http://www.google.com/movies?near=%s&hl=hu&date=%d", city, date);
+		String url = String.format("http://www.google.com/movies?near=%s&hl=%s&date=%d", city, local, date);
+
+		GoogleShowtimeService.LOGGER.info("Google movie url: {}", url);
 
 		Document doc = Jsoup.connect(url).get();
 		doc.outputSettings().charset("UTF-8");

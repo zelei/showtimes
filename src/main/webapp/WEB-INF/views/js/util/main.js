@@ -31,7 +31,9 @@ define(["Class"], function(Class) {
 					};
 					
 					geocoder.geocode(params, function(results, status) {
-						cityFunction(self.getCityShortName(results));
+						var cityShortName = self.getCityShortName(results);
+						var local = self.getLocalShortName(results);
+						cityFunction(local, cityShortName);
 					});
 
 				});
@@ -49,7 +51,22 @@ define(["Class"], function(Class) {
 				});
 
 				return shorName;
+			},
+			
+			getLocalShortName : function(results) {
+				
+				var shorName = undefined;
+				results[0].address_components.each(function(address) {
+					if (address.types.indexOf("political") >= 0 && address.types.indexOf("country") >= 0) {
+						shorName = address.short_name;
+						return
+					}
+				});
+
+				return shorName;
 			}
+			
+			
 		});
 
 
