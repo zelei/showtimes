@@ -117,6 +117,11 @@ public class JSONShowtimeCacheService implements ShowtimeCacheService<String> {
 			return JSONShowtimeCacheService.this;
 		}
 
+		@Override
+		public String toString() {
+			return "CacheKey [near=" + this.near + ", local=" + this.local + ", date=" + this.date + "]";
+		}
+
 	}
 
 }

@@ -40,7 +40,7 @@ define([ 'Class', 'knockout', 'Ajax', 'domain' ], function(Class, ko, Ajax, doma
 			var url = window.location.pathname + '/api';
 
 			var parameters = {
-				near : near
+				near : encodeURIComponent(near)
 			};
 
 			new Ajax.Request(url, {

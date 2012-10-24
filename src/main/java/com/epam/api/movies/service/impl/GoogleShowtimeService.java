@@ -1,9 +1,11 @@
 package com.epam.api.movies.service.impl;
 
+import java.net.URLEncoder;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -16,11 +18,36 @@ import com.epam.api.movies.service.model.Movie;
 import com.epam.api.movies.service.model.Theater;
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.base.Strings;
 import com.google.common.collect.Collections2;
+import com.google.common.collect.Lists;
 
 public class GoogleShowtimeService implements ShowtimeService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(GoogleShowtimeService.class);
+
+	private static final Predicate<String> NOT_EMPTY = new Predicate<String>() {
+		@Override
+		public boolean apply(final String info) {
+			return !info.isEmpty();
+		}
+	};
+
+	private static final Predicate<String> NOT_DOT = new Predicate<String>() {
+		@Override
+		public boolean apply(final String info) {
+			return CharMatcher.isNot(':').matchesAllOf(info);
+		}
+	};
+
+	private static final Function<String, String> EMPTY_OR_TRIM = new Function<String, String>() {
+		@Override
+		public String apply(String info) {
+			return Strings.nullToEmpty(info).trim();
+		}
+	};
 
 	public GoogleShowtimeService() {
 		super();
@@ -29,7 +56,7 @@ public class GoogleShowtimeService implements ShowtimeService {
 	@Override
 	public Collection<Theater> getShowtimes(String city, String local, int date) throws Exception {
 
-		String url = String.format("http://www.google.com/movies?near=%s&hl=%s&date=%d", city, local, date);
+		String url = String.format("http://www.google.com/movies?near=%s&hl=%s&date=%d", URLEncoder.encode(city, "UTF-8"), local, date);
 
 		GoogleShowtimeService.LOGGER.info("Google movie url: {}", url);
 
@@ -61,14 +88,13 @@ public class GoogleShowtimeService implements ShowtimeService {
 
 			@Override
 			public Movie apply(Element movieElement) {
-				String name = GoogleShowtimeService.removeSpecialChars(movieElement.select(".name").text());
-				String info = GoogleShowtimeService.removeSpecialChars(movieElement.select(".info").text());
-				String rating = movieElement.select(".info>nobr>img[alt]").attr("alt");
-				List<String> times = GoogleShowtimeService.processTimesElement(movieElement.select(".times>span"));
+				String name = GoogleShowtimeService.this.removeSpecialChars(movieElement.select(".name").text());
 
-				if (!rating.isEmpty()) {
-					info = info.substring(0, info.lastIndexOf(" - :"));
-				}
+				Elements links = movieElement.select(".info>a").remove();
+				String info = GoogleShowtimeService.this.clearInfoText(GoogleShowtimeService.this.removeSpecialChars(movieElement.select(".info").text()));
+
+				String rating = movieElement.select(".info>nobr>img[alt]").attr("alt");
+				List<String> times = GoogleShowtimeService.this.processTimesElement(movieElement.select(".times>span"));
 
 				return new Movie(name, info, rating, times);
 			}
@@ -77,7 +103,15 @@ public class GoogleShowtimeService implements ShowtimeService {
 
 	}
 
-	private static List<String> processTimesElement(Elements timesElement) {
+	private String clearInfoText(String infoText) {
+
+		Collection<String> transformedList = Collections2.transform(Lists.newArrayList(infoText.split("-")), GoogleShowtimeService.EMPTY_OR_TRIM);
+		Collection<String> infoList = Collections2.filter(transformedList, Predicates.and(GoogleShowtimeService.NOT_EMPTY, GoogleShowtimeService.NOT_DOT));
+
+		return StringUtils.join(infoList, " - ");
+	}
+
+	private List<String> processTimesElement(Elements timesElement) {
 
 		return new LinkedList<String>(Collections2.transform(timesElement, new Function<Element, String>() {
 
@@ -86,7 +120,7 @@ public class GoogleShowtimeService implements ShowtimeService {
 				// Times should be date, there is a possibly solution for
 				// formatting
 				// http://magicmonster.com/kb/prg/java/spring/webmvc/jackson_custom.html
-				return GoogleShowtimeService.removeSpecialChars(timeElement.text());
+				return GoogleShowtimeService.this.removeSpecialChars(timeElement.text());
 
 			}
 
@@ -94,7 +128,7 @@ public class GoogleShowtimeService implements ShowtimeService {
 
 	}
 
-	private static String removeSpecialChars(String text) {
+	private String removeSpecialChars(String text) {
 		return CharMatcher.INVISIBLE.and(CharMatcher.isNot(' ')).removeFrom(text);
 	}
 
