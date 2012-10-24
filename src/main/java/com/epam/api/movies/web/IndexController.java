@@ -1,6 +1,5 @@
 package com.epam.api.movies.web;
 
-import hu.debrecen.adastra.card.service.ShowtimeCacheService;
 
 import java.util.Locale;
 
@@ -13,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.epam.api.movies.service.ShowtimeCacheService;
 
 @Controller
 public class IndexController {

@@ -1,4 +1,4 @@
-package hu.debrecen.adastra.card.service.model;
+package com.epam.api.movies.service.model;
 
 import java.io.Serializable;
 import java.util.Collection;

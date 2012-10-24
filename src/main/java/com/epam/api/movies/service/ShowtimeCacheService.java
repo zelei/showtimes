@@ -1,4 +1,4 @@
-package hu.debrecen.adastra.card.service;
+package com.epam.api.movies.service;
 
 import java.util.concurrent.ExecutionException;
 

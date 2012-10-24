@@ -1,7 +1,5 @@
-package hu.debrecen.adastra.card.service.impl;
+package com.epam.api.movies.service.impl;
 
-import hu.debrecen.adastra.card.service.ShowtimeCacheService;
-import hu.debrecen.adastra.card.service.ShowtimeService;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -10,6 +8,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.epam.api.movies.service.ShowtimeCacheService;
+import com.epam.api.movies.service.ShowtimeService;
 import com.epam.api.movies.web.IndexController;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;

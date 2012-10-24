@@ -1,8 +1,5 @@
-package hu.debrecen.adastra.card.service.impl;
+package com.epam.api.movies.service.impl;
 
-import hu.debrecen.adastra.card.service.ShowtimeService;
-import hu.debrecen.adastra.card.service.model.Movie;
-import hu.debrecen.adastra.card.service.model.Theater;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -13,6 +10,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.epam.api.movies.service.ShowtimeService;
+import com.epam.api.movies.service.model.Movie;
+import com.epam.api.movies.service.model.Theater;
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Function;
 import com.google.common.collect.Collections2;

@@ -1,8 +1,9 @@
-package hu.debrecen.adastra.card.service;
+package com.epam.api.movies.service;
 
-import hu.debrecen.adastra.card.service.model.Theater;
 
 import java.util.Collection;
+
+import com.epam.api.movies.service.model.Theater;
 
 public interface ShowtimeService {
 
