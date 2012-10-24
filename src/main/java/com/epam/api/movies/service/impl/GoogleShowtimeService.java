@@ -19,33 +19,18 @@ import com.epam.api.movies.service.model.Theater;
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.base.Strings;
+import com.google.common.base.Splitter;
 import com.google.common.collect.Collections2;
-import com.google.common.collect.Lists;
+import com.google.common.collect.Iterables;
 
 public class GoogleShowtimeService implements ShowtimeService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(GoogleShowtimeService.class);
 
-	private static final Predicate<String> NOT_EMPTY = new Predicate<String>() {
-		@Override
-		public boolean apply(final String info) {
-			return !info.isEmpty();
-		}
-	};
-
 	private static final Predicate<String> NOT_DOT = new Predicate<String>() {
 		@Override
 		public boolean apply(final String info) {
-			return CharMatcher.isNot(':').matchesAllOf(info);
-		}
-	};
-
-	private static final Function<String, String> EMPTY_OR_TRIM = new Function<String, String>() {
-		@Override
-		public String apply(String info) {
-			return Strings.nullToEmpty(info).trim();
+			return !info.equalsIgnoreCase(":");
 		}
 	};
 
@@ -104,11 +89,10 @@ public class GoogleShowtimeService implements ShowtimeService {
 	}
 
 	private String clearInfoText(String infoText) {
-
-		Collection<String> transformedList = Collections2.transform(Lists.newArrayList(infoText.split("-")), GoogleShowtimeService.EMPTY_OR_TRIM);
-		Collection<String> infoList = Collections2.filter(transformedList, Predicates.and(GoogleShowtimeService.NOT_EMPTY, GoogleShowtimeService.NOT_DOT));
-
-		return StringUtils.join(infoList, " - ");
+		Iterable<String> infoIterable = Splitter.on(" -").omitEmptyStrings().trimResults().split(infoText);
+		String clearedInfoText = StringUtils.join(Iterables.filter(infoIterable, GoogleShowtimeService.NOT_DOT), " - ");
+		GoogleShowtimeService.LOGGER.trace("'{}'->'{}'", infoText, clearedInfoText);
+		return clearedInfoText;
 	}
 
 	private List<String> processTimesElement(Elements timesElement) {
