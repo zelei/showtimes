@@ -7,16 +7,10 @@
 	<version>0.1.0-SNAPSHOT</version>
 	<name>Google Showtimes</name>
 
-<!-- 	<scm> -->
-<!-- 		<connection>scm:git:git@github.com:zelei/showtimes.git</connection> -->
-<!-- 		<developerConnection>scm:git:git@github.com:zelei/showtimes.git</developerConnection> -->
-<!-- 		<url>scm:git:git@github.com/zelei/showtimes</url> -->
-<!-- 	</scm> -->
-
 	<scm>
-		<connection>scm:git:https://github.com/zelei/showtimes.git</connection>
-		<developerConnection>scm:git:https://github.com/zelei/showtimes.git</developerConnection>
-		<url>scm:git:https://github.com/zelei/showtimes</url>
+		<connection>scm:git:git@github.com:zelei/showtimes.git</connection>
+		<developerConnection>scm:git:git@github.com:zelei/showtimes.git</developerConnection>
+		<url>scm:git:git@github.com/zelei/showtimes</url>
 	</scm>
 
 	<properties>
@@ -385,7 +379,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore />
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
