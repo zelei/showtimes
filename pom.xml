@@ -5,15 +5,15 @@
 	<groupId>com.epam.api</groupId>
 	<artifactId>showtimes</artifactId>
 	<packaging>war</packaging>
-	<version>0.1.0-SNAPSHOT</version>
+	<version>0.1.1-SNAPSHOT</version>
 	<name>Google Showtimes</name>
-	
+
 	<scm>
-    <connection>scm:git:git@github.com:zelei/showtimes.git</connection>
-    <developerConnection>scm:git:git@github.com:zelei/showtimes.git</developerConnection>
-    <url>scm:git:git@github.com/zelei/showtimes</url>
-  </scm>
-	
+		<connection>scm:git:git@github.com:zelei/showtimes.git</connection>
+		<developerConnection>scm:git:git@github.com:zelei/showtimes.git</developerConnection>
+		<url>scm:git:git@github.com/zelei/showtimes</url>
+	</scm>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.6</java.version>
@@ -194,19 +194,24 @@
 
 		<plugins>
 
-     <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-release-plugin</artifactId>
-          <version>2.2.2</version>
-          <dependencies>
-              <dependency>
-                  <groupId>org.apache.maven.plugins</groupId>
-                  <artifactId>maven-scm-plugin</artifactId>
-                  <version>1.8.1</version>
-              </dependency>
-          </dependencies>
-      </plugin>
-        
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.4.1</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-scm-plugin</artifactId>
+						<version>1.9-SNAPSHOT</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.maven.scm</groupId>
+						<artifactId>maven-scm-provider-gitexe</artifactId>
+						<version>1.9-SNAPSHOT</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
 			<plugin>
 				<groupId>org.cloudfoundry</groupId>
 				<artifactId>cf-maven-plugin</artifactId>
@@ -341,7 +346,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore />
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
