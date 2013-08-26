@@ -4,14 +4,14 @@
 	<groupId>com.epam.api</groupId>
 	<artifactId>showtimes</artifactId>
 	<packaging>war</packaging>
-	<version>0.1.1</version>
+	<version>0.1.2-SNAPSHOT</version>
 	<name>Google Showtimes</name>
 
 	<scm>
 		<connection>scm:git:git@github.com:zelei/showtimes.git</connection>
 		<developerConnection>scm:git:git@github.com:zelei/showtimes.git</developerConnection>
 		<url>scm:git:git@github.com/zelei/showtimes</url>
-	  <tag>tag2</tag>
+	  <tag>HEAD</tag>
   </scm>
 
 	<properties>
